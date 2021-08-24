@@ -42,6 +42,7 @@ export const EditProject = () => {
                 id: project.id,
                 ...values,
               })
+              // @ts-ignore
               await setQueryData(updated)
               router.push(Routes.ShowProjectPage({ projectId: updated.id }))
             } catch (error) {
