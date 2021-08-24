@@ -1,5 +1,5 @@
 import { forwardRef, PropsWithoutRef } from "react"
-import { useField } from "react-final-form"
+import { Field, useField } from "react-final-form"
 
 export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
   /** Field name. */
@@ -11,7 +11,7 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
 }
 
-export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
+export const LabeledTextAreaField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
   ({ name, label, outerProps, ...props }, ref) => {
     const {
       input,
@@ -26,13 +26,13 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       <div {...outerProps}>
         <label className="flex flex-col items-start">
           {label}
-          <input
-            {...input}
+          <Field
+            component={"textarea"}
             className="px-1 py-2 border rounded focus:ring focus:outline-none ring-purple-200 block w-full my-2"
-            disabled={submitting}
             {...props}
-            ref={ref}
-          />
+            {...input}
+            disabled={submitting}
+          ></Field>
         </label>
 
         {touched && normalizedError && (
@@ -45,4 +45,4 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
   }
 )
 
-export default LabeledTextField
+export default LabeledTextAreaField

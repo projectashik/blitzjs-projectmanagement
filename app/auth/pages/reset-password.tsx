@@ -4,6 +4,7 @@ import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import { ResetPassword } from "app/auth/validations"
 import resetPassword from "app/auth/mutations/resetPassword"
+import AuthLayout from "app/core/layouts/AuthLayout"
 
 const ResetPasswordPage: BlitzPage = () => {
   const query = useRouterQuery()
@@ -11,8 +12,6 @@ const ResetPasswordPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Set a New Password</h1>
-
       {isSuccess ? (
         <div>
           <h2>Password Reset Successfully</h2>
@@ -54,6 +53,10 @@ const ResetPasswordPage: BlitzPage = () => {
 }
 
 ResetPasswordPage.redirectAuthenticatedTo = "/"
-ResetPasswordPage.getLayout = (page) => <Layout title="Reset Your Password">{page}</Layout>
+ResetPasswordPage.getLayout = (page) => (
+  <AuthLayout heading="Set a new password" title="Reset Your Password">
+    {page}
+  </AuthLayout>
+)
 
 export default ResetPasswordPage
